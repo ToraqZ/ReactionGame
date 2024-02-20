@@ -9,6 +9,8 @@
 #define REACT_GAME_GAME_H_
 
 #include "max7219.h"
+#include "stm32L1xx_hal.h"
+#include <time.h>
 #include "main.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -48,6 +50,8 @@ typedef struct{
 	uint32_t  state_execution_count;
 	uint32_t state_base_time;
 	FSM_Animation_Enum animation_state;
+	uint32_t randomTime;
+	uint32_t randomCase;
  } FSM_Controllers_TypeDef;
 
 typedef struct {

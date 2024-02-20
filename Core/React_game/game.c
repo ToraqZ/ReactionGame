@@ -21,6 +21,17 @@ static FSM_State_TypeDef states_list[] = {
 
 };
 
+uint8_t checkP1 = 0;
+uint8_t checkP2 = 0;
+uint8_t checkP3 = 0;
+uint8_t checkP4 = 0;
+
+uint8_t actualBTN1;
+uint8_t actualBTN2;
+uint8_t actualBTN3;
+uint8_t actualBTN4;
+
+
 uint8_t LETTERS[26] = { 0b01110111, // A
 						0b01111111, // B
 						0b01001110, // C
@@ -62,6 +73,14 @@ static void set_new_state(FSM_State_Enum _new_state){
 		fsm_handle->controllers.state_execution_count=0;
 		fsm_handle->controllers.animation_state=ANIMATION_RUNNING;
 		fsm_handle->controllers.state_base_time=HAL_GetTick();
+
+		actualBTN1 = fsm_handle->inputs.nb_press_btn1;
+		actualBTN2 = fsm_handle->inputs.nb_press_btn2;
+		actualBTN3 = fsm_handle->inputs.nb_press_btn3;
+		actualBTN4 = fsm_handle->inputs.nb_press_btn4;
+
+		fsm_handle->controllers.randomTime = rand() % (3000 - 1);
+		fsm_handle->controllers.randomCase = rand() % (5 - 1);
 	}
 	max7219_erase_no_decode();
 }
@@ -81,6 +100,9 @@ HAL_StatusTypeDef init_game(Game_Handle_TypeDef *_game_handle, FSM_Handle_TypeDe
 	fsm_handle->states_list = states_list;
 	fsm_handle->states_list_sz = sizeof(states_list) / sizeof(FSM_State_TypeDef);
 
+	fsm_handle->controllers.randomTime = 0;
+	fsm_handle->controllers.randomCase = 0;
+
 	set_new_state(STATE_START);
 
 	return HAL_OK;
@@ -93,32 +115,18 @@ HAL_StatusTypeDef run_game(void){
 
 	switch(fsm_handle->state.state){
 	case STATE_START:
-		uint8_t actualBTN1 = fsm_handle->inputs.nb_press_btn1;
-		uint8_t actualBTN2 = fsm_handle->inputs.nb_press_btn2;
-		uint8_t actualBTN3 = fsm_handle->inputs.nb_press_btn3;
-		uint8_t actualBTN4 = fsm_handle->inputs.nb_press_btn4;
-
-		uint8_t checkP1=0;
-		uint8_t checkP2=0;
-		uint8_t checkP3=0;
-		uint8_t checkP4=0;
-
-		checkP1 = fsm_handle->inputs.nb_press_btn1 - actualBTN1;
-		checkP2 = fsm_handle->inputs.nb_press_btn1 - actualBTN1;
-		checkP3 = fsm_handle->inputs.nb_press_btn1 - actualBTN1;
-		checkP4 = fsm_handle->inputs.nb_press_btn1 - actualBTN1;
-
 		if(fsm_handle->controllers.animation_state==ANIMATION_ENDED){
 				set_new_state(STATE_WP);
 		}
-
-	//	if (checkP1 != 0 || checkP2 != 0 || checkP3 != 0 || checkP4 != 0){
-	//		set_new_state(STATE_WP);
-	//	}
-
-
 		break;
 	case STATE_WP:
+		checkP1 = fsm_handle->inputs.nb_press_btn1 - actualBTN1;
+		checkP2 = fsm_handle->inputs.nb_press_btn2 - actualBTN2;
+		checkP3 = fsm_handle->inputs.nb_press_btn3 - actualBTN3;
+		checkP4 = fsm_handle->inputs.nb_press_btn4 - actualBTN4;
+		if (checkP1 != 0 || checkP2 != 0 || checkP3 != 0 || checkP4 != 0) {
+			set_new_state(STATE_GP);
+		}
 
 		break;
 	case STATE_GP:
@@ -161,12 +169,29 @@ void state_start(void){
 void state_wp(void){
 	HAL_StatusTypeDef max7219_status;
 
-	max7219_status=display_letter(game_handle->max7219_handle, 'P', 1);
-	if(max7219_status != HAL_OK)
+	max7219_status = display_letter(game_handle->max7219_handle, 'P', 0);
+	if (max7219_status != HAL_OK)
 		Error_Handler();
+	max7219_status = display_letter(game_handle->max7219_handle, 'R', 1);
+	if (max7219_status != HAL_OK)
+		Error_Handler();
+	max7219_status = display_letter(game_handle->max7219_handle, 'E', 2);
+	if (max7219_status != HAL_OK)
+		Error_Handler();
+	max7219_status = display_letter(game_handle->max7219_handle, 'S', 3);
+	if (max7219_status != HAL_OK)
+		Error_Handler();
+
+
 
 }
 void state_gp(void){
+
+	HAL_Delay(fsm_handle->controllers.randomTime);
+	HAL_StatusTypeDef max7219_status;
+	max7219_status = display_letter(game_handle->max7219_handle, 'R', 1);
+		if (max7219_status != HAL_OK)
+			Error_Handler();
 
 }
 void state_wait(void){
