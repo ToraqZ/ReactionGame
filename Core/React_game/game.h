@@ -38,9 +38,24 @@ typedef struct {
 } FSM_State_TypeDef;
 
 typedef struct {
+	uint8_t nb_press_btn1;
+	uint8_t nb_press_btn2;
+	uint8_t nb_press_btn3;
+	uint8_t nb_press_btn4;
+} FSM_Inputs_TypeDef;
+
+typedef struct{
+	uint32_t  state_execution_count;
+	uint32_t state_base_time;
+	FSM_Animation_Enum animation_state;
+ } FSM_Controllers_TypeDef;
+
+typedef struct {
 	FSM_State_TypeDef state;
 	FSM_State_TypeDef *states_list;
 	size_t states_list_sz;
+	FSM_Inputs_TypeDef inputs;
+	FSM_Controllers_TypeDef controllers;
 } FSM_Handle_TypeDef;
 
 HAL_StatusTypeDef init_game(Game_Handle_TypeDef *game_handle, FSM_Handle_TypeDef *_fsm_handle);
