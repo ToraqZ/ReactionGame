@@ -1,6 +1,6 @@
 Core/React_game/game.o: ../Core/React_game/game.c \
  ../Core/React_game/game.h \
- C:/Users/anahi/STM32CubeIDE/workspace_1.14.0/React_game/Drivers/MAX7219-master/max7219.h \
+ /Users/alexandrecossu/Documents/ReactionGame/Drivers/MAX7219-master/max7219.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h \
  ../Core/Inc/stm32l1xx_hal_conf.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc.h \
@@ -25,9 +25,10 @@ Core/React_game/game.o: ../Core/React_game/game.c \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_pwr.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_pwr_ex.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_spi.h \
- ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_exti.h
+ ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_exti.h \
+ ../Core/Inc/main.h
 ../Core/React_game/game.h:
-C:/Users/anahi/STM32CubeIDE/workspace_1.14.0/React_game/Drivers/MAX7219-master/max7219.h:
+/Users/alexandrecossu/Documents/ReactionGame/Drivers/MAX7219-master/max7219.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h:
 ../Core/Inc/stm32l1xx_hal_conf.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc.h:
@@ -53,3 +54,4 @@ C:/Users/anahi/STM32CubeIDE/workspace_1.14.0/React_game/Drivers/MAX7219-master/m
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_pwr_ex.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_spi.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_exti.h:
+../Core/Inc/main.h:

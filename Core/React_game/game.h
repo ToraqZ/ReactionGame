@@ -2,45 +2,57 @@
  * game.h
  *
  *  Created on: Feb 20, 2024
- *      Author: anahi
+ *      Author: anahide
  */
 
 #ifndef REACT_GAME_GAME_H_
 #define REACT_GAME_GAME_H_
 
-int tab_case[5][4]={{1,0,0,0},
-		             {0,1,0,0},
-					 {0,0,1,0},
-					 {0,0,0,1},
-					 {1,1,1,1}};
+#include "max7219.h"
+#include "main.h"
+#include "stdio.h"
+#include "stdlib.h"
 
-uint8_t LETTERS[26] = { 0b01111101, // A
-						0b01111111, // B
-						0b00111001, // C
-						0b00111111, // D
-						0b01111001, // E
-						0b01110001, // F
-						0b01111011, // G
-						0b01110110, // H
-						0b00000110, // I
-						0b00011110, // J
-						0b01110110, // K
-						0b00111000, // L
-						0b01010100, // M
-						0b00010101, // N
-						0b00011101, // O
-						0b01100111, // P
-						0b01100111, // Q
-						0b01010000, // R
-						0b01101101, // S
-						0b01111000, // T
-						0b00111110, // U
-						0b00111000, // V
-						0b01010100, // W
-						0b01110110, // X
-						0b01101110, // Y
-						0b01011011, // Z
-						};
+typedef struct {
+	//TypeDef_Led_Array led_array;
+	MAX7219_Handle_TypeDef max7219_handle;
+} Game_Handle_TypeDef;
 
-void init_game(MAX7219_Handle_TypeDef *max7219_handle);
+typedef enum {
+	STATE_START = 0, // START
+	STATE_WP = 1, // Wait player
+	STATE_GP = 2, // Generate pattern
+	STATE_WAIT = 3, // Wait
+	STATE_DISP = 4, // Display
+	STATE_STOP = 5, // Stop & print
+} FSM_State_Enum;
+
+typedef enum {
+	ANIMATION_RUNNING,
+	ANIMATION_ENDED,
+} FSM_Animation_Enum;
+
+typedef struct {
+	FSM_State_Enum state;
+	void (*state_callback) ();
+} FSM_State_TypeDef;
+
+typedef struct {
+	FSM_State_TypeDef state;
+	FSM_State_TypeDef *states_list;
+	size_t states_list_sz;
+} FSM_Handle_TypeDef;
+
+HAL_StatusTypeDef init_game(Game_Handle_TypeDef *game_handle, FSM_Handle_TypeDef *_fsm_handle);
+HAL_StatusTypeDef run_game(void);
+
+void state_start(void);
+void state_wp(void);
+void state_gp(void);
+void state_wait(void);
+void state_disp(void);
+void state_stop(void);
+
+HAL_StatusTypeDef display_letter(MAX7219_Handle_TypeDef max7219_handle, char letter, int pos);
+
 #endif /* REACT_GAME_GAME_H_ */
