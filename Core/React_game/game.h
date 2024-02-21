@@ -22,11 +22,11 @@ typedef struct {
 
 typedef enum {
 	STATE_START = 0, // START
-	STATE_WP = 1, // Wait player
-	STATE_GP = 2, // Generate pattern
-	STATE_WAIT = 3, // Wait
-	STATE_DISP = 4, // Display
-	STATE_STOP = 5, // Stop & print
+	STATE_WP, // Wait player
+	STATE_GP, // Generate pattern
+	STATE_WAIT, // Wait
+	STATE_DISP, // Display
+	STATE_LOOSE, // Loose
 } FSM_State_Enum;
 
 typedef enum {
@@ -52,6 +52,7 @@ typedef struct{
 	FSM_Animation_Enum animation_state;
 	uint32_t randomTime;
 	uint32_t randomCase;
+	uint32_t timing;
  } FSM_Controllers_TypeDef;
 
 typedef struct {
@@ -70,7 +71,7 @@ void state_wp(void);
 void state_gp(void);
 void state_wait(void);
 void state_disp(void);
-void state_stop(void);
+void state_loose(void);
 
 HAL_StatusTypeDef display_letter(MAX7219_Handle_TypeDef max7219_handle, char letter, int pos);
 

@@ -62,8 +62,8 @@ all: main-build
 main-build: React_game.elf secondary-outputs
 
 # Tool invocations
-React_game.elf React_game.map: $(OBJS) $(USER_OBJS) /Users/alexandrecossu/Documents/ReactionGame/STM32L152RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "React_game.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/alexandrecossu/Documents/ReactionGame/STM32L152RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="React_game.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+React_game.elf React_game.map: $(OBJS) $(USER_OBJS) C:\Users\Cossu\OneDrive\Bureau\ReactionGame\STM32L152RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "React_game.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Cossu\OneDrive\Bureau\ReactionGame\STM32L152RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="React_game.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
