@@ -4,7 +4,7 @@
  *  Created on: Feb 20, 2024
  *      Author: anahide
  */
-
+#include "main.h"
 #include "game.h"
 
 static Game_Handle_TypeDef *game_handle = NULL;
@@ -120,6 +120,11 @@ HAL_StatusTypeDef run_game(void) {
 		checkP4 = fsm_handle->inputs.nb_press_btn4 - actualBTN4;
 		if (checkP1 != 0 || checkP2 != 0 || checkP3 != 0 || checkP4 != 0) {
 			set_new_state(STATE_WAIT);
+		}
+		if (HAL_GetTick() - fsm_handle->controllers.state_base_time >= 10000){
+			HAL_SuspendTick();
+			HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+			SystemClock_Config();
 		}
 
 		break;
