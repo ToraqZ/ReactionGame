@@ -5,7 +5,7 @@
 ../Core/React_game/game.c:227:6:state_wp	24	static
 ../Core/React_game/game.c:244:6:state_gp	16	static
 ../Core/React_game/game.c:286:6:state_disp	32	static
-../Core/React_game/game.c:313:6:state_wait	8	static
-../Core/React_game/game.c:320:6:state_loose	24	static
-../Core/React_game/game.c:341:19:display_letter	40	static
-../Core/React_game/game.c:351:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/React_game/game.c:316:6:state_wait	8	static
+../Core/React_game/game.c:323:6:state_loose	24	static
+../Core/React_game/game.c:344:19:display_letter	40	static
+../Core/React_game/game.c:354:6:HAL_GPIO_EXTI_Callback	16	static
