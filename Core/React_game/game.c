@@ -295,9 +295,6 @@ void state_disp(void) {
 	max7219_status = max7219_display_decode(0, mil);
 	if (max7219_status != HAL_OK)
 		Error_Handler();
-	max7219_status = max7219_display_decode(0, 0b10000000);
-		if (max7219_status != HAL_OK)
-			Error_Handler();
 	max7219_status = max7219_display_decode(1, cent);
 	if (max7219_status != HAL_OK)
 		Error_Handler();
