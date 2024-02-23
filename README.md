@@ -9,7 +9,7 @@
 Le but de ce projet est de pratiquer l'utilisation de fonctionnalités avancées en STM32 tels que les sleeps mode, timers, ect...
 
 # Machine à états
-![alt text](https://github.com/ToraqZ/labviewfpga/blob/modifDoc/branchements.png?raw=true)
+![alt text](https://github.com/ToraqZ/ReactionGame/blob/main/Doc/state_machine.png?raw=true)
 
 # Comment ça marche ?
 Lancez votre jeu et appuyez sur un des boutons. Une fois qu'un chiffre apparait sur l'écran, appuyez le plus rapidement possible sur le bouton correspondant ! Votre temps de réaction sera affiché. Rejouez autant de fois que vous voulez !
