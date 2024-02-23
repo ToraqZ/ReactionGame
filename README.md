@@ -1,5 +1,5 @@
 - [STM32 LEVEL 2 - REACTION GAME](#STM32-LEVEL-2---REACTION-GAME)
-- [Machine a état](#Machine-a-état-)
+- [Machine à états](#Machine-à-états-)
 - [How it works ?](#how-it-works-)
 - [Progress](#progress)
 - [Thanks](#thanks)
